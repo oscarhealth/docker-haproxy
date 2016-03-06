@@ -22,12 +22,13 @@ instructions at https://github.com/docker-library/docs/tree/master/haproxy#how-t
 
 ### PCRE
 
-Enables PCRE JIT compilation for faster regular expression parsing. The PCRE
-Peformance Project has more information on benchmarks, etc.
+Enables PCRE JIT compilation for faster regular expression parsing. The [PCRE
+Peformance Project][0] has more information on benchmarks, etc.
 
 Compilation follows as close as possible to the [debian package][1], excluding
 C++ support and dynamic linking.
 
+[0]: http://sljit.sourceforge.net/pcre.html
 [1]: https://buildd.debian.org/status/fetch.php?pkg=pcre3&arch=i386&ver=2%3A8.35-3.3%2Bdeb8u2&stamp=1452484092
 
 ### Stateless Zip (SLZ)
