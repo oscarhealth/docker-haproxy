@@ -20,10 +20,14 @@ ENV LUA_MD5=33278c2ab5ee3c1a875be8d55c1ca2a1
 ENV LUAROCKS_VERSION=2.3.0
 ENV LUAROCKS_MD5=a38126684cf42b7d0e7a3c7cf485defb
 
-RUN buildDeps='curl gcc make file libc-dev libreadline-dev unzip' \
+RUN buildDeps='make file libc-dev libreadline-dev' \
     set -x && \
     apt-get update && \
     apt-get install --no-install-recommends -y ${buildDeps} && \
+
+    # binaries that lunarocks needs to operate
+
+    apt-get install --no-install-recommends -y gcc unzip curl && \
 
     # SLZ
 
