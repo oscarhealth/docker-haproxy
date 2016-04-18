@@ -53,16 +53,16 @@ improving security, and applying best practice development processes"][3]
 Output from `haproxy -vv`:
 
 ```
-$ docker run -it --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.6.3 2015/12/25
-Copyright 2000-2015 Willy Tarreau <willy@haproxy.org>
+$ docker run -it --rm aasmith/haproxy:lua haproxy -vv
+HA-Proxy version 1.6.4 2016/03/13
+Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
 
 Build options :
   TARGET  = linux2628
   CPU     = generic
   CC      = gcc
   CFLAGS  = -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement
-  OPTIONS = USE_SLZ=1 USE_OPENSSL=1 USE_STATIC_PCRE=1 USE_PCRE_JIT=1
+  OPTIONS = USE_SLZ=1 USE_OPENSSL=1 USE_LUA=1 USE_STATIC_PCRE=1 USE_PCRE_JIT=1
 
 Default settings :
   maxconn = 2000, bufsize = 16384, maxrewrite = 1024, maxpollevents = 200
@@ -77,7 +77,7 @@ OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
 Built with PCRE version : 8.38 2015-11-23
 PCRE library supports JIT : yes
-Built without Lua support
+Built with Lua version : Lua 5.3.2
 Built with transparent proxy support using: IP_TRANSPARENT IPV6_TRANSPARENT IP_FREEBIND
 
 Available polling systems :
