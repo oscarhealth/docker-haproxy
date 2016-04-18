@@ -14,7 +14,13 @@ ENV PCRE_MD5 8a353fe1450216b6655dfcf3561716d9
 ENV LIBRESSL_VERSION 2.2.6
 ENV LIBRESSL_MD5 d91d57161bcf40b22f78190224c4f028
 
-RUN buildDeps='curl gcc make file libc-dev' \
+ENV LUA_VERSION=5.3.2
+ENV LUA_MD5=33278c2ab5ee3c1a875be8d55c1ca2a1
+
+ENV LUAROCKS_VERSION=2.3.0
+ENV LUAROCKS_MD5=a38126684cf42b7d0e7a3c7cf485defb
+
+RUN buildDeps='curl gcc make file libc-dev libreadline-dev unzip' \
     set -x && \
     apt-get update && \
     apt-get install --no-install-recommends -y ${buildDeps} && \
@@ -51,6 +57,26 @@ RUN buildDeps='curl gcc make file libc-dev' \
     make install && \
     cd .. && \
 
+    # Lua
+
+    curl -OJ http://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gz && \
+    echo ${LUA_MD5} lua-${LUA_VERSION}.tar.gz | md5sum -c && \
+    tar zxf lua-${LUA_VERSION}.tar.gz && \
+    cd lua-${LUA_VERSION} && \
+    make linux && \
+    make install && \
+    cd .. && \
+
+    # Lua package manager
+
+    curl -OJL http://luarocks.org/releases/luarocks-${LUAROCKS_VERSION}.tar.gz && \
+    echo ${LUAROCKS_MD5} luarocks-${LUAROCKS_VERSION}.tar.gz | md5sum -c && \
+    tar zxvf luarocks-${LUAROCKS_VERSION}.tar.gz && \
+    cd luarocks-${LUAROCKS_VERSION} && \
+    ./configure && \
+    make bootstrap && \
+    cd .. && \
+
     # HAProxy
 
     curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HAPROXY_VERSION}.tar.gz" && \
@@ -61,6 +87,7 @@ RUN buildDeps='curl gcc make file libc-dev' \
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
       USE_STATIC_PCRE=1 USE_PCRE_JIT=1 PCREDIR=/tmp/pcre \
       USE_OPENSSL=1 SSL_INC=/tmp/libressl/include SSL_LIB=/tmp/libressl/lib \
+      USE_LUA=1 \
       all \
       install-bin && \
     mkdir -p /usr/local/etc/haproxy && \
