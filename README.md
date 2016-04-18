@@ -15,7 +15,31 @@ FROM aasmith/haproxy
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 ```
 
-For more information about using this image, see the offical docker image
+To pin to a specific version, use the branch or tag:
+
+```
+FROM aasmith/haproxy:1.6 # stay on the latest the 1.6 line
+```
+
+```
+FROM aasmith/haproxy:1.6.4 # use exactly 1.6.4 
+```
+
+### Lua
+
+A lua version is also available on the `lua` branch:
+
+```
+FROM aasmith/haproxy:lua # latest lua
+```
+
+```
+FROM aasmith/haproxy:lua-1.6.4
+```
+
+The lua version also includes the luarocks package manager.
+
+For more information about using these images, see the offical docker image
 instructions at https://github.com/docker-library/docs/tree/master/haproxy#how-to-use-this-image.
 
 ## Libraries
