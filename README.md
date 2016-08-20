@@ -1,5 +1,5 @@
 # aasmith/docker-haproxy
-HAProxy compiled against newer/faster libraries (PCRE w/ JIT, SLZ, and LibreSSL).
+HAProxy + *LUA* compiled against newer/faster libraries (PCRE w/ JIT, SLZ, and LibreSSL).
 
 This haproxy docker image uses statically-linked modern libraries where
 possible. Otherwise, it attempts to follow the official docker image as
@@ -19,6 +19,13 @@ For more information about using this image, see the offical docker image
 instructions at https://github.com/docker-library/docs/tree/master/haproxy#how-to-use-this-image.
 
 ## Libraries
+
+### Lua
+
+Since HAProxy 1.6, [Lua support][4] has been available for adding in extra features
+that do not require re-compilation, or knowledge of C.
+
+[4]: http://blog.haproxy.com/2015/03/12/haproxy-1-6-dev1-and-lua/
 
 ### PCRE
 
