@@ -81,10 +81,6 @@ $ docker run -it --rm aasmith/haproxy haproxy -vv
 HA-Proxy version 1.6.8 2016/08/14
 Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
 
-kudu:docker-haproxy aasmith$ docker run foo haproxy -vv
-HA-Proxy version 1.6.8 2016/08/14
-Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
-
 Build options :
   TARGET  = linux2628
   CPU     = generic
