@@ -77,7 +77,7 @@ OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
 Built with PCRE version : 8.39 2016-06-14
 PCRE library supports JIT : yes
-Built with Lua version : Lua 5.3.2
+Built with Lua version : Lua 5.3.3
 Built with transparent proxy support using: IP_TRANSPARENT IPV6_TRANSPARENT IP_FREEBIND
 
 Available polling systems :
