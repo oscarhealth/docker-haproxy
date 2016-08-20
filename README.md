@@ -78,8 +78,12 @@ Output from `haproxy -vv`:
 
 ```
 $ docker run -it --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.6.3 2015/12/25
-Copyright 2000-2015 Willy Tarreau <willy@haproxy.org>
+HA-Proxy version 1.6.8 2016/08/14
+Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
+
+kudu:docker-haproxy aasmith$ docker run foo haproxy -vv
+HA-Proxy version 1.6.8 2016/08/14
+Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
 
 Build options :
   TARGET  = linux2628
@@ -94,12 +98,12 @@ Default settings :
 Encrypted password support via crypt(3): yes
 Built with libslz for stateless compression.
 Compression algorithms supported : identity("identity"), deflate("deflate"), raw-deflate("deflate"), gzip("gzip")
-Built with OpenSSL version : LibreSSL 2.2.6
-Running on OpenSSL version : LibreSSL 2.2.6
+Built with OpenSSL version : LibreSSL 2.2.9
+Running on OpenSSL version : LibreSSL 2.2.9
 OpenSSL library supports TLS extensions : yes
 OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
-Built with PCRE version : 8.38 2015-11-23
+Built with PCRE version : 8.39 2016-06-14
 PCRE library supports JIT : yes
 Built without Lua support
 Built with transparent proxy support using: IP_TRANSPARENT IPV6_TRANSPARENT IP_FREEBIND
