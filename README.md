@@ -22,7 +22,7 @@ FROM aasmith/haproxy:1.6 # stay on the latest the 1.6 line
 ```
 
 ```
-FROM aasmith/haproxy:1.6.4 # use exactly 1.6.4 
+FROM aasmith/haproxy:1.6.8 # use exactly 1.6.8
 ```
 
 ### Lua
@@ -34,7 +34,7 @@ FROM aasmith/haproxy:lua # latest lua
 ```
 
 ```
-FROM aasmith/haproxy:lua-1.6.4
+FROM aasmith/haproxy:lua-1.6.8
 ```
 
 The lua version also includes the luarocks package manager.
