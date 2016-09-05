@@ -1,8 +1,8 @@
 FROM debian:jessie
 
 ENV HAPROXY_MAJOR 1.6
-ENV HAPROXY_VERSION 1.6.8
-ENV HAPROXY_MD5 8cb3719013e7f34c6d689dabf8a8cd6e
+ENV HAPROXY_VERSION 1.6.9
+ENV HAPROXY_MD5 c52eee40eb66f290d6f089c339b9d2b3
 
 ENV LIBSLZ_VERSION v1.0.0
 # No md5 for libslz yet -- the tarball is dynamically
