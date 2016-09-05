@@ -78,7 +78,7 @@ Output from `haproxy -vv`:
 
 ```
 $ docker run -it --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.6.8 2016/08/14
+HA-Proxy version 1.6.9 2016/08/30
 Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
 
 Build options :
@@ -94,8 +94,8 @@ Default settings :
 Encrypted password support via crypt(3): yes
 Built with libslz for stateless compression.
 Compression algorithms supported : identity("identity"), deflate("deflate"), raw-deflate("deflate"), gzip("gzip")
-Built with OpenSSL version : LibreSSL 2.2.9
-Running on OpenSSL version : LibreSSL 2.2.9
+Built with OpenSSL version : LibreSSL 2.4.2
+Running on OpenSSL version : LibreSSL 2.4.2
 OpenSSL library supports TLS extensions : yes
 OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
