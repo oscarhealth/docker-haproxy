@@ -4,7 +4,7 @@ ENV HAPROXY_MAJOR 1.6
 ENV HAPROXY_VERSION 1.6.9
 ENV HAPROXY_MD5 c52eee40eb66f290d6f089c339b9d2b3
 
-ENV LIBSLZ_VERSION v1.0.0
+ENV LIBSLZ_VERSION 1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
 # generated and it differs every time.
 
@@ -21,8 +21,8 @@ RUN buildDeps='curl gcc make file libc-dev' \
 
     # SLZ
 
-    curl -OJ "http://git.1wt.eu/web?p=libslz.git;a=snapshot;h=v1.0.0;sf=tgz" && \
-    tar zxvf libslz-${LIBSLZ_VERSION}.tar.gz && \
+    curl -OJ "http://git.1wt.eu/web?p=libslz.git;a=snapshot;h=v${LIBSLZ_VERSION};sf=tgz" && \
+    tar zxvf libslz-v${LIBSLZ_VERSION}.tar.gz && \
     make -C libslz static && \
 
     # PCRE
