@@ -1,18 +1,18 @@
 FROM debian:jessie
 
 ENV HAPROXY_MAJOR 1.6
-ENV HAPROXY_VERSION 1.6.9
-ENV HAPROXY_MD5 c52eee40eb66f290d6f089c339b9d2b3
+ENV HAPROXY_VERSION 1.6.10
+ENV HAPROXY_MD5 6d47461c008b823a0088d19ec30dbe4e
 
-ENV LIBSLZ_VERSION v1.0.0
+ENV LIBSLZ_VERSION 1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
 # generated and it differs every time.
 
 ENV PCRE_VERSION 8.39
 ENV PCRE_MD5 26a76d97e04c89fe9ce22ecc1cd0b315
 
-ENV LIBRESSL_VERSION 2.4.2
-ENV LIBRESSL_MD5 faf8eee9e66d7db24444b2be5c28a862
+ENV LIBRESSL_VERSION 2.4.4
+ENV LIBRESSL_MD5 9d98be5dffb1e4e3a3e6423267eba5dc
 
 RUN buildDeps='curl gcc make file libc-dev' \
     set -x && \
@@ -21,8 +21,8 @@ RUN buildDeps='curl gcc make file libc-dev' \
 
     # SLZ
 
-    curl -OJ "http://git.1wt.eu/web?p=libslz.git;a=snapshot;h=v1.0.0;sf=tgz" && \
-    tar zxvf libslz-${LIBSLZ_VERSION}.tar.gz && \
+    curl -OJ "http://git.1wt.eu/web?p=libslz.git;a=snapshot;h=v${LIBSLZ_VERSION};sf=tgz" && \
+    tar zxvf libslz-v${LIBSLZ_VERSION}.tar.gz && \
     make -C libslz static && \
 
     # PCRE
