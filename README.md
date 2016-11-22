@@ -6,6 +6,10 @@ possible. Otherwise, it attempts to follow the official docker image as
 closely as possible. Substitute the image name where needed, as in the example
 below.
 
+## Available Versions
+
+For a complete list of tags, see: https://hub.docker.com/r/aasmith/haproxy/tags/
+
 ## Usage
 
 Example `Dockerfile`:
@@ -22,7 +26,7 @@ FROM aasmith/haproxy:1.6 # stay on the latest the 1.6 line
 ```
 
 ```
-FROM aasmith/haproxy:1.6.8 # use exactly 1.6.8
+FROM aasmith/haproxy:1.6.10 # use exactly 1.6.10
 ```
 
 ### Lua
@@ -34,7 +38,7 @@ FROM aasmith/haproxy:lua # latest lua
 ```
 
 ```
-FROM aasmith/haproxy:lua-1.6.8
+FROM aasmith/haproxy:lua-1.6.10
 ```
 
 The lua version also includes the luarocks package manager.
