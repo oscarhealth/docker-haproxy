@@ -1,5 +1,5 @@
 # aasmith/docker-haproxy
-HAProxy compiled against newer/faster libraries (PCRE w/ JIT, SLZ, and LibreSSL).
+HAProxy compiled against newer/faster libraries (PCRE w/ JIT, SLZ, and OpenSSL 1.1.0).
 
 This haproxy docker image uses statically-linked modern libraries where
 possible. Otherwise, it attempts to follow the official docker image as
@@ -65,12 +65,14 @@ See the [Stateless Zip project][2] for background, benchmarks, etc.
 
 [2]: http://1wt.eu/projects/libslz/
 
-### LibreSSL
+### OpenSSL
 
-An OpenSSL-compatible replacement, ["with goals of modernizing the codebase, 
-improving security, and applying best practice development processes"][3]
+Since 1.7, this image compiles against [OpenSSL][3] 1.1.0. Before 1.7,
+[LibreSSL][4] was used until a [breaking change][5].
 
-[3]: http://www.libressl.org
+[3]: https://openssl.org
+[4]: https://libressl.org
+[5]: https://www.mail-archive.com/haproxy@formilux.org/msg24154.html
 
 ## Compilation Details
 
