@@ -1,8 +1,8 @@
 FROM debian:jessie
 
 ENV HAPROXY_MAJOR 1.7
-ENV HAPROXY_VERSION 1.7-dev6
-ENV HAPROXY_MD5 e9f338c8b5731ba0827e5f280e8bafb2
+ENV HAPROXY_VERSION 1.7.0
+ENV HAPROXY_MD5 ab6e169aeb1b53364aacda80c904398a
 
 ENV LIBSLZ_VERSION 1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
@@ -53,7 +53,7 @@ RUN buildDeps='curl gcc make file libc-dev perl' \
 
     # HAProxy
 
-    curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/devel/haproxy-${HAPROXY_VERSION}.tar.gz" && \
+    curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HAPROXY_VERSION}.tar.gz" && \
     echo "${HAPROXY_MD5} haproxy-${HAPROXY_VERSION}.tar.gz" | md5sum -c && \
     tar zxvf haproxy-${HAPROXY_VERSION}.tar.gz && \
     make -C haproxy-${HAPROXY_VERSION} \
