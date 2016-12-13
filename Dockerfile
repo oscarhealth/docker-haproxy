@@ -11,10 +11,10 @@ ENV LIBSLZ_VERSION 1.1.0
 ENV PCRE_VERSION 8.39
 ENV PCRE_MD5 26a76d97e04c89fe9ce22ecc1cd0b315
 
-ENV OPENSSL_VERSION 1.1.0c
-ENV OPENSSL_SHA256 fc436441a2e05752d31b4e46115eb89709a28aef96d4fe786abe92409b2fd6f5
+ENV LIBRESSL_VERSION 2.4.4
+ENV LIBRESSL_MD5 9d98be5dffb1e4e3a3e6423267eba5dc
 
-RUN buildDeps='curl gcc make file libc-dev perl' \
+RUN buildDeps='curl gcc make file libc-dev' \
     set -x && \
     apt-get update && \
     apt-get install --no-install-recommends -y ${buildDeps} && \
@@ -40,14 +40,14 @@ RUN buildDeps='curl gcc make file libc-dev perl' \
     ./pcre_jit_test && \
     cd .. && \
 
-    # OpenSSL (LibreSSL support removed due to API ambiguity, see: https://www.mail-archive.com/haproxy@formilux.org/msg24160.html)
+    # LibreSSL
 
-    curl -OJ ftp://ftp.linux.hr/pub/openssl/source/openssl-${OPENSSL_VERSION}.tar.gz && \
-    echo ${OPENSSL_SHA256} openssl-${OPENSSL_VERSION}.tar.gz | sha256sum -c && \
-    tar zxvf openssl-${OPENSSL_VERSION}.tar.gz && \
-    cd openssl-${OPENSSL_VERSION} && \
-    ./config no-shared --prefix=/tmp/openssl --openssldir=/tmp/openssl && \
-    make && \
+    curl -OJ http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz && \
+    echo ${LIBRESSL_MD5} libressl-${LIBRESSL_VERSION}.tar.gz | md5sum -c && \
+    tar zxvf libressl-${LIBRESSL_VERSION}.tar.gz && \
+    cd libressl-${LIBRESSL_VERSION} && \
+    ./configure --disable-shared --prefix=/tmp/libressl && \
+    make check && \
     make install && \
     cd .. && \
 
@@ -60,14 +60,14 @@ RUN buildDeps='curl gcc make file libc-dev perl' \
       TARGET=linux2628 \
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
       USE_STATIC_PCRE=1 USE_PCRE_JIT=1 PCREDIR=/tmp/pcre \
-      USE_OPENSSL=1 SSL_INC=/tmp/openssl/include SSL_LIB=/tmp/openssl/lib USE_PTHREAD_PSHARED=1 \
+      USE_OPENSSL=1 SSL_INC=/tmp/libressl/include SSL_LIB=/tmp/libressl/lib \
       all \
       install-bin && \
     mkdir -p /usr/local/etc/haproxy && \
     cp -R haproxy-${HAPROXY_VERSION}/examples/errorfiles /usr/local/etc/haproxy/errors && \
 
     # Clean up
-    rm -rf /var/lib/apt/lists/* /tmp/* haproxy* pcre* openssl* libslz* && \
+    rm -rf /var/lib/apt/lists/* /tmp/* haproxy* pcre* libressl* libslz* && \
     apt-get purge -y --auto-remove ${buildDeps}
 
 
