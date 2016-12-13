@@ -8,7 +8,12 @@ below.
 
 ## Available Versions
 
-For a complete list of tags, see: https://hub.docker.com/r/aasmith/haproxy/tags/
+For a complete list of docker tags you can use, see: https://hub.docker.com/r/aasmith/haproxy/tags/
+
+### Branches
+
+[1.6](https://github.com/aasmith/docker-haproxy/tree/1.6) | [1.7](https://github.com/aasmith/docker-haproxy/tree/1.7) | [lua](https://github.com/aasmith/docker-haproxy/tree/lua)
+--- | --- | ---
 
 ## Usage
 
