@@ -61,7 +61,7 @@ Output from `haproxy -vv`:
 
 ```
 $ docker run --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.6.10 2016/11/20
+HA-Proxy version 1.6.11 2016/12/25
 Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
 
 Build options :
