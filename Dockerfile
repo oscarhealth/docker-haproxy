@@ -8,8 +8,8 @@ ENV LIBSLZ_VERSION 1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
 # generated and it differs every time.
 
-ENV PCRE_VERSION 8.39
-ENV PCRE_MD5 26a76d97e04c89fe9ce22ecc1cd0b315
+ENV PCRE_VERSION 8.40
+ENV PCRE_MD5 890c808122bd90f398e6bc40ec862102
 
 ENV LIBRESSL_VERSION 2.4.4
 ENV LIBRESSL_MD5 9d98be5dffb1e4e3a3e6423267eba5dc
