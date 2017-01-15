@@ -87,8 +87,8 @@ Output from `haproxy -vv`:
 
 ```
 $ docker run --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.6.11 2016/12/25
-Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
+HA-Proxy version 1.7.2 2017/01/13
+Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
   TARGET  = linux2628
@@ -108,8 +108,8 @@ Running on OpenSSL version : LibreSSL 2.4.4
 OpenSSL library supports TLS extensions : yes
 OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
-Built with PCRE version : 8.39 2016-06-14
-Running on PCRE version : 8.39 2016-06-14
+Built with PCRE version : 8.40 2017-01-11
+Running on PCRE version : 8.40 2017-01-11
 PCRE library supports JIT : yes
 Built without Lua support
 Built with transparent proxy support using: IP_TRANSPARENT IPV6_TRANSPARENT IP_FREEBIND
@@ -119,4 +119,9 @@ Available polling systems :
        poll : pref=200,  test result OK
      select : pref=150,  test result OK
 Total: 3 (3 usable), will use epoll.
+
+Available filters :
+	[COMP] compression
+	[TRACE] trace
+	[SPOE] spoe
 ```
