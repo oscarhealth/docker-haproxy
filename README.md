@@ -6,6 +6,15 @@ possible. Otherwise, it attempts to follow the official docker image as
 closely as possible. Substitute the image name where needed, as in the example
 below.
 
+## Available Versions
+
+For a complete list of docker tags you can use, see: https://hub.docker.com/r/aasmith/haproxy/tags/
+
+### Branches
+
+[1.6](https://github.com/aasmith/docker-haproxy/tree/1.6) | [1.7](https://github.com/aasmith/docker-haproxy/tree/1.7) | [lua](https://github.com/aasmith/docker-haproxy/tree/lua) | [lua-1.6](https://github.com/aasmith/docker-haproxy/tree/lua-1.6) | [lua-1.7](https://github.com/aasmith/docker-haproxy/tree/lua-1.7)
+--- | --- | --- | --- | --- | ---
+
 ## Usage
 
 Example `Dockerfile`:
