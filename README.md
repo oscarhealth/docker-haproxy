@@ -15,7 +15,31 @@ FROM aasmith/haproxy
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 ```
 
-For more information about using this image, see the offical docker image
+To pin to a specific version, use the branch or tag:
+
+```
+FROM aasmith/haproxy:1.6 # stay on the latest the 1.6 line
+```
+
+```
+FROM aasmith/haproxy:1.6.8 # use exactly 1.6.8
+```
+
+### Lua
+
+A lua version is also available on the `lua` branch:
+
+```
+FROM aasmith/haproxy:lua # latest lua
+```
+
+```
+FROM aasmith/haproxy:lua-1.6.8
+```
+
+The lua version also includes the luarocks package manager.
+
+For more information about using these images, see the offical docker image
 instructions at https://github.com/docker-library/docs/tree/master/haproxy#how-to-use-this-image.
 
 ## Libraries
@@ -61,8 +85,8 @@ Output from `haproxy -vv`:
 
 ```
 $ docker run --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.6.11 2016/12/25
-Copyright 2000-2016 Willy Tarreau <willy@haproxy.org>
+HA-Proxy version 1.7.3 2017/02/28
+Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
   TARGET  = linux2628
@@ -77,13 +101,13 @@ Default settings :
 Encrypted password support via crypt(3): yes
 Built with libslz for stateless compression.
 Compression algorithms supported : identity("identity"), deflate("deflate"), raw-deflate("deflate"), gzip("gzip")
-Built with OpenSSL version : LibreSSL 2.4.4
-Running on OpenSSL version : LibreSSL 2.4.4
+Built with OpenSSL version : LibreSSL 2.4.5
+Running on OpenSSL version : LibreSSL 2.4.5
 OpenSSL library supports TLS extensions : yes
 OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
-Built with PCRE version : 8.39 2016-06-14
-Running on PCRE version : 8.39 2016-06-14
+Built with PCRE version : 8.40 2017-01-11
+Running on PCRE version : 8.40 2017-01-11
 PCRE library supports JIT : yes
 Built with Lua version : Lua 5.3.4
 Built with transparent proxy support using: IP_TRANSPARENT IPV6_TRANSPARENT IP_FREEBIND
@@ -93,4 +117,9 @@ Available polling systems :
        poll : pref=200,  test result OK
      select : pref=150,  test result OK
 Total: 3 (3 usable), will use epoll.
+
+Available filters :
+	[COMP] compression
+	[TRACE] trace
+	[SPOE] spoe
 ```
