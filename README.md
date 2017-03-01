@@ -12,8 +12,8 @@ For a complete list of docker tags you can use, see: https://hub.docker.com/r/aa
 
 ### Branches
 
-[1.6](https://github.com/aasmith/docker-haproxy/tree/1.6) | [1.7](https://github.com/aasmith/docker-haproxy/tree/1.7) | [lua](https://github.com/aasmith/docker-haproxy/tree/lua)
---- | --- | ---
+[1.6](https://github.com/aasmith/docker-haproxy/tree/1.6) | [1.7](https://github.com/aasmith/docker-haproxy/tree/1.7) | [lua](https://github.com/aasmith/docker-haproxy/tree/lua) | [lua-1.6](https://github.com/aasmith/docker-haproxy/tree/lua-1.6) | [lua-1.7](https://github.com/aasmith/docker-haproxy/tree/lua-1.7)
+--- | --- | --- | --- | --- | ---
 
 ## Usage
 
