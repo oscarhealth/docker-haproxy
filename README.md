@@ -86,8 +86,7 @@ improving security, and applying best practice development processes"][3]
 Output from `haproxy -vv`:
 
 ```
-$ docker run --rm aasmith/haproxy haproxy -vv
-HA-Proxy version 1.7.3 2017/02/28
+HA-Proxy version 1.7.4 2017/03/27
 Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
@@ -121,7 +120,7 @@ Available polling systems :
 Total: 3 (3 usable), will use epoll.
 
 Available filters :
-	[COMP] compression
-	[TRACE] trace
-	[SPOE] spoe
+        [COMP] compression
+        [TRACE] trace
+        [SPOE] spoe
 ```
