@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 ENV HAPROXY_MAJOR 1.7
 ENV HAPROXY_VERSION 1.7.6
