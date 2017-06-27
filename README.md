@@ -86,14 +86,14 @@ improving security, and applying best practice development processes"][3]
 Output from `haproxy -vv`:
 
 ```
-HA-Proxy version 1.7.4 2017/03/27
+HA-Proxy version 1.7.7 2017/06/25
 Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
   TARGET  = linux2628
   CPU     = generic
   CC      = gcc
-  CFLAGS  = -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement
+  CFLAGS  = -O2 -g -fno-strict-aliasing -Wdeclaration-after-statement -fwrapv
   OPTIONS = USE_SLZ=1 USE_OPENSSL=1 USE_STATIC_PCRE=1 USE_PCRE_JIT=1
 
 Default settings :
