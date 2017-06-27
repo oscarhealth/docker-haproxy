@@ -14,10 +14,10 @@ ENV PCRE_MD5 890c808122bd90f398e6bc40ec862102
 ENV LIBRESSL_VERSION 2.4.5
 ENV LIBRESSL_MD5 c4bd1779a79929bbeb59121449d142c3
 
-RUN buildDeps='curl gcc make file libc-dev' \
+RUN buildDeps='curl gcc make file libc-dev signify-openbsd' \
     set -x && \
     apt-get update && \
-    apt-get install --no-install-recommends -y ${buildDeps} && \
+    apt-get install --no-install-recommends -y ${buildDeps} ca-certificates && \
 
     # SLZ
 
@@ -42,8 +42,10 @@ RUN buildDeps='curl gcc make file libc-dev' \
 
     # LibreSSL
 
-    curl -OJ http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz && \
-    echo ${LIBRESSL_MD5} libressl-${LIBRESSL_VERSION}.tar.gz | md5sum -c && \
+    curl -OJ https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl.pub && \
+    curl -OJ https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/SHA256.sig && \
+    curl -OJ https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz && \
+    signify-openbsd -C -p libressl.pub -x SHA256.sig libressl-${LIBRESSL_VERSION}.tar.gz && \
     tar zxvf libressl-${LIBRESSL_VERSION}.tar.gz && \
     cd libressl-${LIBRESSL_VERSION} && \
     ./configure --disable-shared --prefix=/tmp/libressl && \
@@ -67,7 +69,7 @@ RUN buildDeps='curl gcc make file libc-dev' \
     cp -R haproxy-${HAPROXY_VERSION}/examples/errorfiles /usr/local/etc/haproxy/errors && \
 
     # Clean up
-    rm -rf /var/lib/apt/lists/* /tmp/* haproxy* pcre* libressl* libslz* && \
+    rm -rf /var/lib/apt/lists/* /tmp/* haproxy* pcre* libressl* libslz* SHA256.sig && \
     apt-get purge -y --auto-remove ${buildDeps}
 
 
