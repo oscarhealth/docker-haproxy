@@ -1,4 +1,4 @@
-ARG OS=debian:stretch
+ARG OS=debian:stretch-slim
 
 ARG LIBRESSL_VERSION=2.4.5
 
