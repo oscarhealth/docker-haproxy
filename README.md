@@ -86,7 +86,7 @@ improving security, and applying best practice development processes"][3]
 Output from `haproxy -vv`:
 
 ```
-HA-Proxy version 1.7.7 2017/06/25
+HA-Proxy version 1.7.9 2017/08/18
 Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
@@ -107,8 +107,8 @@ Running on OpenSSL version : LibreSSL 2.4.5
 OpenSSL library supports TLS extensions : yes
 OpenSSL library supports SNI : yes
 OpenSSL library supports prefer-server-ciphers : yes
-Built with PCRE version : 8.40 2017-01-11
-Running on PCRE version : 8.40 2017-01-11
+Built with PCRE version : 8.41 2017-07-05
+Running on PCRE version : 8.41 2017-07-05
 PCRE library supports JIT : yes
 Built without Lua support
 Built with transparent proxy support using: IP_TRANSPARENT IPV6_TRANSPARENT IP_FREEBIND
@@ -120,7 +120,7 @@ Available polling systems :
 Total: 3 (3 usable), will use epoll.
 
 Available filters :
-        [COMP] compression
-        [TRACE] trace
-        [SPOE] spoe
+	[COMP] compression
+	[TRACE] trace
+	[SPOE] spoe
 ```
