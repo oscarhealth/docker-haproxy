@@ -93,7 +93,7 @@ improving security, and applying best practice development processes"][3]
 Output from `haproxy -vv`:
 
 ```
-HA-Proxy version 1.7.4 2017/03/27
+HA-Proxy version 1.7.7 2017/06/25
 Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
