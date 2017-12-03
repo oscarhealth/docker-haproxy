@@ -1,17 +1,18 @@
-ARG OS=debian:stretch
+ARG OS=debian:stretch-slim
 
-ARG LIBRESSL_VERSION=2.4.5
+ARG OPENSSL_VERSION=1.1.0g
+ARG OPENSSL_SHA256=de4d501267da39310905cb6dc8c6121f7a2cad45a7707f76df828fe1b85073af
 
-ARG PCRE_VERSION=8.41
-ARG PCRE_MD5=2e7896647ee25799cb454fe287ffcd08
+ARG PCRE2_VERSION=10.30
+ARG PCRE2_SHA256=b549873a39f804480c2e6145a78adcba53e38162d90ef6ea92384f6ecf2fde76
 
 ARG LIBSLZ_VERSION=1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
 # generated and it differs every time.
 
-ARG HAPROXY_MAJOR=1.7
-ARG HAPROXY_VERSION=1.7.9
-ARG HAPROXY_MD5=a2bbbdd45ffe18d99cdcf26aa992f92d
+ARG HAPROXY_MAJOR=1.8
+ARG HAPROXY_VERSION=1.8.0
+ARG HAPROXY_MD5=6ccea4619b7183fbcc8c98bae1f9823d
 
 
 ### Runtime -- the base image for all others
@@ -27,44 +28,43 @@ RUN apt-get update && \
 FROM runtime as builder
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y gcc make file libc-dev signify-openbsd
+    apt-get install --no-install-recommends -y gcc make file libc-dev perl libtext-template-perl
 
 
-### LibreSSL
+### OpenSSL
 
 FROM builder as ssl
 
-ARG LIBRESSL_VERSION
+ARG OPENSSL_VERSION
+ARG OPENSSL_SHA256
 
-RUN curl -OJ https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl.pub && \
-    curl -OJ https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/SHA256.sig && \
-    curl -OJ https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz && \
-    signify-openbsd -C -p libressl.pub -x SHA256.sig libressl-${LIBRESSL_VERSION}.tar.gz && \
-    tar zxvf libressl-${LIBRESSL_VERSION}.tar.gz && \
-    cd libressl-${LIBRESSL_VERSION} && \
-    ./configure --disable-shared --prefix=/tmp/libressl && \
-    make check && \
-    make install
+RUN curl -OJ https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz && \
+    echo ${OPENSSL_SHA256} openssl-${OPENSSL_VERSION}.tar.gz | sha256sum -c && \
+    tar zxvf openssl-${OPENSSL_VERSION}.tar.gz && \
+    cd openssl-${OPENSSL_VERSION} && \
+    ./config no-shared --prefix=/tmp/openssl && \
+    make && \
+    make TESTS='-40' test && \
+    make install_sw
 
 
-### PCRE
+### PCRE2
 
-FROM builder as pcre
+FROM builder as pcre2
 
-ARG PCRE_VERSION
-ARG PCRE_MD5
+ARG PCRE2_VERSION
+ARG PCRE2_SHA256
 
-RUN curl -OJ "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${PCRE_VERSION}.tar.gz" && \
-    echo ${PCRE_MD5} pcre-${PCRE_VERSION}.tar.gz | md5sum -c && \
-    tar zxvf pcre-${PCRE_VERSION}.tar.gz && \
-    cd pcre-${PCRE_VERSION} && \
+RUN curl -OJ "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-${PCRE2_VERSION}.tar.gz" && \
+    echo ${PCRE2_SHA256} pcre2-${PCRE2_VERSION}.tar.gz | sha256sum -c && \
+    tar zxvf pcre2-${PCRE2_VERSION}.tar.gz && \
+    cd pcre2-${PCRE2_VERSION} && \
 
-    CPPFLAGS="-D_FORTIFY_SOURCE=2" \
     LDFLAGS="-fPIE -pie -Wl,-z,relro -Wl,-z,now" \
     CFLAGS="-pthread -g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wall -fvisibility=hidden" \
-    ./configure --prefix=/tmp/pcre --disable-shared --enable-utf8 --enable-jit --enable-unicode-properties --disable-cpp && \
-    make install && \
-    ./pcre_jit_test
+    ./configure --prefix=/tmp/pcre2 --disable-shared --enable-utf8 --enable-jit --enable-unicode-properties --disable-cpp && \
+    make check && \
+    make install
 
 
 ### libslz
@@ -82,9 +82,9 @@ RUN curl -OJ "http://git.1wt.eu/web?p=libslz.git;a=snapshot;h=v${LIBSLZ_VERSION}
 
 FROM builder as haproxy
 
-COPY --from=ssl  /tmp/libressl /tmp/libressl
-COPY --from=pcre /tmp/pcre     /tmp/pcre
-COPY --from=slz  /libslz       /libslz
+COPY --from=ssl   /tmp/openssl /tmp/openssl
+COPY --from=pcre2 /tmp/pcre2   /tmp/pcre2
+COPY --from=slz   /libslz      /libslz
 
 ARG HAPROXY_MAJOR
 ARG HAPROXY_VERSION
@@ -96,8 +96,8 @@ RUN curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HA
     make -C haproxy-${HAPROXY_VERSION} \
       TARGET=linux2628 \
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
-      USE_STATIC_PCRE=1 USE_PCRE_JIT=1 PCREDIR=/tmp/pcre \
-      USE_OPENSSL=1 SSL_INC=/tmp/libressl/include SSL_LIB=/tmp/libressl/lib \
+      USE_STATIC_PCRE2=1 USE_PCRE2_JIT=1 PCRE2DIR=/tmp/pcre2 \
+      USE_OPENSSL=1 SSL_INC=/tmp/openssl/include SSL_LIB=/tmp/openssl/lib \
       DESTDIR=/tmp/haproxy PREFIX= \
       all \
       install-bin && \
