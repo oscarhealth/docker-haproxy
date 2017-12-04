@@ -79,7 +79,7 @@ See the [Stateless Zip project][2] for background, benchmarks, etc.
 Output from `haproxy -vv`:
 
 ```
-HA-Proxy version 1.8.0 2017/11/26
+HA-Proxy version 1.8.1 2017/12/03
 Copyright 2000-2017 Willy Tarreau <willy@haproxy.org>
 
 Build options :
