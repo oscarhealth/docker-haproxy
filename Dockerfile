@@ -2,8 +2,8 @@ ARG OS=debian:stretch
 
 ARG LIBRESSL_VERSION=2.4.5
 
-ARG PCRE_VERSION=8.41
-ARG PCRE_MD5=2e7896647ee25799cb454fe287ffcd08
+ARG PCRE_VERSION=8.42
+ARG PCRE_MD5=fc18afa0f14a25475cf097ee102a3e4f
 
 ARG LIBSLZ_VERSION=1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
