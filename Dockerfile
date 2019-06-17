@@ -11,8 +11,8 @@ ARG LIBSLZ_VERSION=1.1.0
 # generated and it differs every time.
 
 ARG HAPROXY_MAJOR=1.9
-ARG HAPROXY_VERSION=1.9.2
-ARG HAPROXY_MD5=da1b5e5f1b005d88e012868979cfe0bd
+ARG HAPROXY_VERSION=1.9.8
+ARG HAPROXY_MD5=efd17947e2c6d1fb26a0987968b1bc6a
 
 
 ### Runtime -- the base image for all others
