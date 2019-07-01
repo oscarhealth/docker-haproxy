@@ -10,9 +10,9 @@ ARG LIBSLZ_VERSION=1.1.0
 # No md5 for libslz yet -- the tarball is dynamically
 # generated and it differs every time.
 
-ARG HAPROXY_MAJOR=1.8
-ARG HAPROXY_VERSION=1.8.9
-ARG HAPROXY_MD5=1466cf8c1c036e376265b86df43efc89
+ARG HAPROXY_MAJOR=2.0
+ARG HAPROXY_VERSION=2.0.1
+ARG HAPROXY_MD5=96dd4897ac46d704e18554541686238d
 
 
 ### Runtime -- the base image for all others
@@ -94,7 +94,7 @@ RUN curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HA
     echo "${HAPROXY_MD5} haproxy-${HAPROXY_VERSION}.tar.gz" | md5sum -c && \
     tar zxvf haproxy-${HAPROXY_VERSION}.tar.gz && \
     make -C haproxy-${HAPROXY_VERSION} \
-      TARGET=linux2628 \
+      TARGET=linux-glibc \
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
       USE_STATIC_PCRE2=1 USE_PCRE2_JIT=1 PCRE2DIR=/tmp/pcre2 \
       USE_SYSTEMD=1 \
