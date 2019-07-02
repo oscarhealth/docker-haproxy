@@ -28,7 +28,7 @@ RUN apt-get update && \
 FROM runtime as builder
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y gcc make file libc-dev perl libtext-template-perl
+    apt-get install --no-install-recommends -y gcc make file libc-dev perl libtext-template-perl libsystemd-dev
 
 
 ### OpenSSL
@@ -97,6 +97,7 @@ RUN curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HA
       TARGET=linux2628 \
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
       USE_STATIC_PCRE2=1 USE_PCRE2_JIT=1 PCRE2DIR=/tmp/pcre2 \
+      USE_SYSTEMD=1 \
       USE_OPENSSL=1 SSL_INC=/tmp/openssl/include SSL_LIB=/tmp/openssl/lib \
       DESTDIR=/tmp/haproxy PREFIX= \
       all \
