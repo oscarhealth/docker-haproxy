@@ -98,6 +98,7 @@ RUN curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HA
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
       USE_STATIC_PCRE2=1 USE_PCRE2_JIT=1 PCRE2DIR=/tmp/pcre2 \
       USE_SYSTEMD=1 \
+      EXTRA_OBJS="contrib/prometheus-exporter/service-prometheus.o" \
       USE_OPENSSL=1 SSL_INC=/tmp/openssl/include SSL_LIB=/tmp/openssl/lib \
       DESTDIR=/tmp/haproxy PREFIX= \
       all \
