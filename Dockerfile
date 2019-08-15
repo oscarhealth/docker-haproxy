@@ -1,7 +1,7 @@
 ARG OS=debian:stretch-slim
 
-ARG OPENSSL_VERSION=1.1.0h
-ARG OPENSSL_SHA256=5835626cde9e99656585fc7aaa2302a73a7e1340bf8c14fd635a62c66802a517
+ARG OPENSSL_VERSION=1.1.1c
+ARG OPENSSL_SHA256=f6fb3079ad15076154eda9413fed42877d668e7069d9b87396d0804fdb3f4c90
 
 ARG PCRE2_VERSION=10.31
 ARG PCRE2_SHA256=e11ebd99dd23a7bccc9127d95d9978101b5f3cf0a6e7d25a1b1ca165a97166c4
@@ -11,8 +11,8 @@ ARG LIBSLZ_VERSION=1.1.0
 # generated and it differs every time.
 
 ARG HAPROXY_MAJOR=2.0
-ARG HAPROXY_VERSION=2.0.3
-ARG HAPROXY_MD5=cbe13aad74e839a3a055908ab545279d
+ARG HAPROXY_VERSION=2.0.4
+ARG HAPROXY_MD5=e0a295b3aa468f70ba261cc5ae9a5f83
 
 
 ### Runtime -- the base image for all others
@@ -90,10 +90,16 @@ ARG HAPROXY_MAJOR
 ARG HAPROXY_VERSION
 ARG HAPROXY_MD5
 
+# Have to patch the Makefile in order to move -ldl and -lpthread to the end of the gcc commmand.
+# See here for explaination: https://www.mail-archive.com/haproxy@formilux.org/msg32341.html
+RUN apt-get install --no-install-recommends -y patch
+COPY Makefile.patch /tmp/Makefile.patch
+
 RUN curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HAPROXY_VERSION}.tar.gz" && \
     echo "${HAPROXY_MD5} haproxy-${HAPROXY_VERSION}.tar.gz" | md5sum -c && \
     tar zxvf haproxy-${HAPROXY_VERSION}.tar.gz && \
-    make -C haproxy-${HAPROXY_VERSION} \
+    patch -d haproxy-${HAPROXY_VERSION} -p0 < /tmp/Makefile.patch && \
+    make -C haproxy-${HAPROXY_VERSION} SHELL='sh -x' \
       TARGET=linux-glibc \
       USE_SLZ=1 SLZ_INC=../libslz/src SLZ_LIB=../libslz \
       USE_STATIC_PCRE2=1 USE_PCRE2_JIT=1 PCRE2DIR=/tmp/pcre2 \
