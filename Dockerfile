@@ -11,8 +11,8 @@ ARG LIBSLZ_VERSION=1.1.0
 # generated and it differs every time.
 
 ARG HAPROXY_MAJOR=2.0
-ARG HAPROXY_VERSION=2.0.6
-ARG HAPROXY_MD5=3c600ff322bb89f66e3f51fb283b988c
+ARG HAPROXY_VERSION=2.0.9
+ARG HAPROXY_MD5=dd1112a210392fa9232019a6e69e1d3c
 
 
 ### Runtime -- the base image for all others
@@ -92,7 +92,7 @@ ARG HAPROXY_MD5
 
 # Have to patch the Makefile in order to move -ldl and -lpthread to the end of the gcc commmand.
 # See here for explaination: https://www.mail-archive.com/haproxy@formilux.org/msg32341.html
-RUN apt-get install --no-install-recommends -y patch
+RUN apt-get update && apt-get install --no-install-recommends -y patch
 COPY Makefile.patch /tmp/Makefile.patch
 
 RUN curl -OJL "http://www.haproxy.org/download/${HAPROXY_MAJOR}/src/haproxy-${HAPROXY_VERSION}.tar.gz" && \
