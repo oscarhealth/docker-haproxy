@@ -11,8 +11,8 @@ ARG LIBSLZ_VERSION=1.1.0
 # generated and it differs every time.
 
 ARG HAPROXY_MAJOR=2.0
-ARG HAPROXY_VERSION=2.0.9
-ARG HAPROXY_MD5=dd1112a210392fa9232019a6e69e1d3c
+ARG HAPROXY_VERSION=2.0.10
+ARG HAPROXY_MD5=501f490f0fb6c01099686d2f0e02f644
 
 
 ### Runtime -- the base image for all others
@@ -55,7 +55,7 @@ FROM builder as pcre2
 ARG PCRE2_VERSION
 ARG PCRE2_SHA256
 
-RUN curl -OJ "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-${PCRE2_VERSION}.tar.gz" && \
+RUN curl -OJ "https://ftp.pcre.org/pub/pcre/pcre2-${PCRE2_VERSION}.tar.gz" && \
     echo ${PCRE2_SHA256} pcre2-${PCRE2_VERSION}.tar.gz | sha256sum -c && \
     tar zxvf pcre2-${PCRE2_VERSION}.tar.gz && \
     cd pcre2-${PCRE2_VERSION} && \
